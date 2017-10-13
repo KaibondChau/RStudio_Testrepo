@@ -1,0 +1,80 @@
+---
+title: "GGplot"
+author: "KKC"
+date: "13 October 2017"
+output: html_document
+---
+```{r}
+gapminder
+```
+```{r}
+library(ggplot2)
+?ggplot
+ggplot(data = gapminder, aes(x = year, y = lifeExp, by=country, color=continent)) +geom_line()
+
+```
+
+```{r}
+ggplot(data = gapminder, aes(x = year , y = lifeExp, color=continent)) +geom_point()
+
+```
+```{r}
+Sinks
+```
+```{r}
+ggplot(data = gapminder, aes(x = gdpPercap, y = lifeExp)) +
+  geom_point() + scale_x_log10() + geom_smooth(method="lm", size=1.5)
+```
+
+
+```{r}
+ggplot(data =Sinks, aes(x = Sampling.date, y = MALDI.ID.1, by=Designation)) +geom_line()
+```
+
+```{r}
+Sinks
+```
+
+
+```{r}
+Sinks2<-read.csv("sinks.csv")
+
+Sinks2
+```
+
+```{r}
+ggplot(data = Sinks2, aes(x = Sampling.date, y=Ward, color=MALDI.ID.1)) +geom_point()
+```
+
+```{r}
+ggplot(data = Sinks2, aes(x=Sampling.date, y=MALDI.ID.1, by=Ward, color=Ward)) +geom_line() +geom_point()
+```
+
+
+```{r}
+rehab <-read.csv("rehab.csv")
+rehab
+
+ggplot(data = rehab, aes(x=STW, y=Sample.site)) +geom_boxplot()
+```
+
+```{r}
+starts.with <- substr(rehab$MALDI.ID, start = 1, stop = 1)
+az.MALDI.ID <- rehab[starts.with %in% c("K", "C"), ]
+ggplot(data = az.MALDI.ID, aes(x = Sample.site, point = MALDI.ID)) +
+  geom_density() + facet_wrap( ~STW)
+```
+
+```{r}
+ggplot(data = gapminder, aes(x = gdpPercap, fill=continent)) +
+ geom_density(alpha=0.6) + facet_wrap( ~ year) + scale_x_log10()
+
+```
+```{r}
+starts.with <- substr(rehab$MALDI.ID, start = 1, stop = 1)
+az.MALDI.ID <- rehab[starts.with %in% c("K", "C"), ]
+ggplot(data = rehab, aes(x = Sample.site, y = MALDI.ID)) +
+  geom_point() + facet_wrap( ~STW)
+```
+```
+
